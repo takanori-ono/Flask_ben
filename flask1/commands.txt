@@ -1,5 +1,11 @@
+[仮想を作成] gitには仮想環境をコミットしないほうがいいとのこと。そのため、clone後は作成する。
+py -m venv .venv
+
 [仮想に入る]
-scripts/activate.bat
+.venv/scripts/activate.bat
+
+[仮想から出る]
+.venv/scripts/deactivate.bat
 
 [外部パッケージインストール]
 pip install flask
