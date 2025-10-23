@@ -1,0 +1,14 @@
+[仮想に入る]
+scripts/activate.bat
+
+[外部パッケージインストール]
+pip install flask
+
+[外部パッケージの一覧]
+pip freeze > require.txt
+
+[オフライン環境用にパッケージファイルのダウンロード]
+pip download -r requirements.txt -d ./whl_files
+
+[オフライン環境でのパッケージインストール]
+pip install --no-index --find-links=./whl_files -r requirements.txt
