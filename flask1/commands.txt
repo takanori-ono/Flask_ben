@@ -7,6 +7,9 @@ pip install flask
 [外部パッケージの一覧]
 pip freeze > requirements.txt
 
+[パッケージのインストール（requirements.txt）]
+pip install -r requirements.txt
+
 [オフライン環境用にパッケージファイルのダウンロード]
 pip download -r requirements.txt -d ./whl_files
 
