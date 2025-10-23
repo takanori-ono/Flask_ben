@@ -4,6 +4,7 @@ whl_files/
 __pycache__/
 *.py[codz]
 *$py.class
+pyvenv.cfg
 
 # C extensions
 *.so
