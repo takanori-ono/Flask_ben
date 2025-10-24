@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy 
 
 app = Flask(__name__)
@@ -61,6 +61,20 @@ def result(name):
 def users():
     all_users = User.query.all()
     return render_template("users.html", users=all_users)
+
+@app.route("/search")
+def search():
+    return render_template("search.html")
+
+@app.route("/search_users")
+def search_users():
+    q = request.args.get("q", "")  # ?q=xxx
+    if q:
+        users = User.query.filter(User.name.like(f"%{q}%")).all()
+    else:
+        users = []
+    results = [{"id": u.id, "name": u.name} for u in users]
+    return jsonify(results)
 
 if __name__ == "__main__":
     app.run(debug=True)

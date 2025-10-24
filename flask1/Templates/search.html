@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}user検索{% endblock %}
+
+{% block content %}
+ <h3>ユーザー検索（インクリメンタルサーチ）</h3>
+
+  <input type="text" id="searchInput" class="form-control mt-3" placeholder="名前を入力...">
+
+  <ul id="results" class="list-group mt-2"></ul>
+
+  <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">トップに戻る</a>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+const input = document.getElementById("searchInput");
+const results = document.getElementById("results");
+
+input.addEventListener("input", async () => {
+  const query = input.value.trim();
+  if (!query) {
+    results.innerHTML = "";
+    return;
+  }
+
+  const response = await fetch(`/search_users?q=${encodeURIComponent(query)}`);
+  const data = await response.json();
+
+  results.innerHTML = "";
+  data.forEach(user => {
+    const li = document.createElement("li");
+    li.textContent = `${user.id}: ${user.name}`;
+    li.classList.add("list-group-item");
+    results.appendChild(li);
+  });
+});
+
+</script>
+{% endblock %}
